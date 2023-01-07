@@ -1,0 +1,33 @@
+.input {
+  margin: 2rem auto;
+  padding: 1rem;
+  width: 50%;
+  height: 80%;
+}
+.form {
+  height: fit-content;
+  background-color: aliceblue;
+}
+
+.input label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  text-decoration: dashed;
+}
+
+.input input {
+  font: inherit;
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 1px;
+  height: 30%;
+  margin-bottom: 0.5rem;
+}
+
+.input input:focus {
+  outline: none;
+  border-color: red;
+}
