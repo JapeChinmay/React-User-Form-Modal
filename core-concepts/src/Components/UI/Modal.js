@@ -33,8 +33,12 @@ const Modal = (props) => {
       )}
 
       {ReactDOM.createPortal(
-        <Overlay toCloseTheModal={props.toCloseTheModal} />,
-        document.getElementById("overlay-root")
+        <Overlay
+          warning={props.warning}
+          message={props.message}
+          toCloseTheModal={props.toCloseTheModal}
+        />,
+        document.getElementById("modal-root")
       )}
     </Fragment>
   );
