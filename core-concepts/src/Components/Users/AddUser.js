@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useRef } from "react";
 import classes from "./AddUser.module.css";
 import Button from "../UI/Button";
 
@@ -9,6 +9,8 @@ const AddUsers = (props) => {
   const [enteredUserName, SetEntereduserName] = useState("");
   const [agechange, SetAgeChange] = useState("");
   const [error, setError] = useState();
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const changeUserNameHandler = (event) => {
     SetEntereduserName(event.target.value);
@@ -19,12 +21,18 @@ const AddUsers = (props) => {
   };
 
   const AddUserHandler = (event) => {
-    if (enteredUserName.trim().length === 0 || agechange.trim().length === 0) {
+    const nameWhichUserEntered = nameInputRef.current.value;
+    const ageWhichUserEntered = ageInputRef.current.value;
+
+    if (
+      nameWhichUserEntered.trim().length === 0 ||
+      ageWhichUserEntered.trim().length === 0
+    ) {
       setError({
         warning: "You hav entered wrong name or no age",
         message: "Enter valid credentials",
       });
-    } else if (+agechange < 10) {
+    } else if (+ageWhichUserEntered < 10) {
       setError({
         warning: "You have entered wrong age",
         message: "enter valid values",
@@ -33,7 +41,7 @@ const AddUsers = (props) => {
 
     event.preventDefault();
 
-    props.getData(enteredUserName, agechange);
+    props.getData(nameWhichUserEntered, ageWhichUserEntered);
 
     SetEntereduserName("");
     SetAgeChange("");
@@ -60,6 +68,7 @@ const AddUsers = (props) => {
             spellCheck
             onChange={changeUserNameHandler}
             value={enteredUserName}
+            ref={nameInputRef}
           />
 
           <label htmlFor="age">age</label>
@@ -68,6 +77,7 @@ const AddUsers = (props) => {
             type="number"
             onChange={changeAgeHandler}
             value={agechange}
+            ref={ageInputRef}
           />
           <Button type="submit">submit</Button>
         </form>
